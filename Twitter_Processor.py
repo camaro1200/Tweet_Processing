@@ -1,7 +1,5 @@
 import os
 import subprocess
-#import preprocessor as p
-#import pandas as pd
 import re
 import sys, getopt
 import argparse
@@ -10,6 +8,8 @@ import os.path
 try:
     import preprocessor as p
     import wget
+    import pandas as pd
+    import nltk
 except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'tweet-preprocessor'])
     subprocess.call(['pip', 'install', 'wget'])
@@ -23,12 +23,6 @@ finally:
 
 # subprocess.call(['pip', 'install', 'wget'])
 # import wget
-
-# subprocess.call(['pip', 'install', 'pandas'])
-# import pandas as pd
-
-# subprocess.call(['pip', 'install', 'nltk'])
-# import nltk
 
 parser = argparse.ArgumentParser(description='Tweet Processor Script', formatter_class=argparse.MetavarTypeHelpFormatter)
 parser.add_argument('-m', '--mode', type=int, help='mode', default = 0 )
@@ -58,7 +52,6 @@ def clean_mode1(df, min_len):
                 df = df.drop(i)
             else:
                 df.loc[i,'Cleaned_Tweet'] = cleaned_tweet
-        
     return df
 
 
